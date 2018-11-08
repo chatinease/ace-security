@@ -48,19 +48,18 @@ spring:
     http:
       legacy:
         enabled: true
-  cloud:
-     gateway:
-       discovery:
-         locator:
+  cloud: 
+    gateway:
+      discovery:
+        locator:
            lowerCaseServiceId: true
            enabled: true
-       routes:
-        # =====================================
+      routes:
         - id: ace-auth
           uri: lb://ace-auth
           order: 8000
           predicates:
-          - Path=/api/auth/**
+          - Path= /api/auth/**
           filters:
           - StripPrefix=2
         - id: ace-admin
@@ -70,16 +69,17 @@ spring:
           - Path=/api/admin/**
           filters:
           - StripPrefix=2
-  consul:
-    enabled: true
-    host: 192.168.1.54
-    port: 8500
-    discovery:
-      healthCheckPath: /actuator/health
-      healthCheckInterval: 5s
-      instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
-      register: true
+    consul:
       enabled: true
+      host: 192.168.1.54
+      port: 8500
+      discovery:
+        healthCheckPath: /actuator/health
+        healthCheckInterval: 5s
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+        register: true
+        enabled: true
+        preferIpAddress: true
 
 logging:
   level:
@@ -90,9 +90,6 @@ management:
     web:
       exposure:
         include: '*'
-  security:
-    enabled: false
-
 
 gate:
   ignore:
@@ -107,12 +104,6 @@ auth:
     token-header: x-client-token
     id: ace-gate  #不填则默认读取spring.application.name
     secret: 123456
-
-feign:
-  httpclient:
-    enabled: false
-  okhttp:
-    enabled: true
 
 ribbon:
   eureka:

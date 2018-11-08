@@ -7,8 +7,8 @@ spring:
         default-property-inclusion: non_null
     redis:
         database: 2
-        host: ${REDIS_HOST:localhost}
-        port: ${REDIS_PORT:6379}
+        host: 192.168.1.54
+        port: 6379
         pool:
         max-active: 20
     datasource:
@@ -53,6 +53,7 @@ spring:
           instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
           register: true
           enabled: true
+          preferIpAddress: true
 
 mybatis:
     basepackage: com.github.wxiaoqi.security.auth.mapper
@@ -127,5 +128,8 @@ management:
     web:
       exposure:
         include: '*'
+  endpoint:
+      health:
+        show-details: ALWAYS                        
   security:
     enabled: false
