@@ -12,6 +12,7 @@ spring:
               instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
               register: true
               enabled: true
+              preferIpAddress: true
 
 server:
     port: 8764 #启动端口
