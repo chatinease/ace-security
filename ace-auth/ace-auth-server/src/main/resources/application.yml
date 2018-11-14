@@ -101,12 +101,10 @@ eureka:
         # ip-address: 127.0.0.1
     client:
         serviceUrl:
-#            defaultZone: http://localhost:8761/eureka/
-                    # docker 部署开启
             defaultZone: http://192.168.1.54:8761/eureka/
-
-
-
+        healthcheck:
+            enabled: true     
+            
 jwt:
   token-header: Authorization
   expire: 14400
